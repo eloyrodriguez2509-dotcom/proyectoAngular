@@ -6,24 +6,47 @@
 
     <ion-card
       class="card-personaje"
-      *ngFor="let p of personajes">
+      *ngFor="let p of personajes"
+    >
 
       <a [routerLink]="['/personajes', p.id]">
 
         <img
-          [src]="p.image"
-          [alt]="p.name">
+          *ngIf="getPersonajeImage(p)"
+          [src]="getPersonajeImage(p)"
+          [alt]="getPersonajeName(p)"
+        >
 
         <ion-card-header>
+
           <ion-card-title>
-            {{ p.name }}
+            {{ getPersonajeName(p) }}
           </ion-card-title>
+
         </ion-card-header>
 
         <ion-card-content>
-          <p>Estado: {{ p.status }}</p>
-          <p>Especie: {{ p.species }}</p>
-          <p>Origen: {{ p.origin.name }}</p>
+
+          <p>
+            Estado:
+            {{ getPersonajeStatus(p) }}
+          </p>
+
+          <p>
+            Especie:
+            {{ getPersonajeSpecies(p) }}
+          </p>
+
+          <p>
+            Género:
+            {{ getPersonajeGender(p) }}
+          </p>
+
+          <p>
+            Origen:
+            {{ p.origin?.name || 'Desconocido' }}
+          </p>
+
         </ion-card-content>
 
       </a>
@@ -31,7 +54,8 @@
       <ion-button
         expand="block"
         class="btn-favorito"
-        (click)="agregarAMisPersonajes(p)">
+        (click)="agregarAMisPersonajes(p)"
+      >
 
         Añadir a favoritos
 

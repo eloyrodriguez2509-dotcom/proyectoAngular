@@ -37,7 +37,7 @@ export class ListaPersonajes implements OnInit {
     private personajeService: PersonajeService,
     private cd: ChangeDetectorRef,
     private supabaseService: SupabaseService,
-    private dialogService: DialogService,  // ← AGREGAR ESTO
+    private dialogService: DialogService,
   ) {}
 
   ngOnInit() {
@@ -45,6 +45,26 @@ export class ListaPersonajes implements OnInit {
       this.personajes = data.results;
       this.cd.detectChanges();
     });
+  }
+
+  getPersonajeImage(personaje: any): string {
+    return personaje?.imagen || personaje?.image || '';
+  }
+
+  getPersonajeName(personaje: any): string {
+    return personaje?.nombre || personaje?.name || 'Sin nombre';
+  }
+
+  getPersonajeStatus(personaje: any): string {
+    return personaje?.estado || personaje?.status || 'Sin estado';
+  }
+
+  getPersonajeSpecies(personaje: any): string {
+    return personaje?.especie || personaje?.species || 'Sin especie';
+  }
+
+  getPersonajeGender(personaje: any): string {
+    return personaje?.genero || personaje?.gender || 'Sin género';
   }
 
   async agregarAMisPersonajes(personaje: any) {
@@ -57,25 +77,24 @@ export class ListaPersonajes implements OnInit {
       return;
     }
 
-    // ✅ CONFIRMAR antes de agregar
-    const confirmado = await this.dialogService.confirmarAgregarItem(personaje.name);
-    
+    const confirmado = await this.dialogService.confirmarAgregarItem(
+      this.getPersonajeName(personaje)
+    );
+
     if (!confirmado) {
       await this.dialogService.mostrarInfo('Operación cancelada');
       return;
     }
 
-    // ✅ AGREGAR a Supabase
     const { error } = await this.supabaseService.supabase
       .from('user_personajes')
       .insert({
         user_id: user.id,
         personaje_id: personaje.id,
-        nombre: personaje.name,
-        imagen: personaje.image,
+        nombre: this.getPersonajeName(personaje),
+        imagen: this.getPersonajeImage(personaje),
       });
 
-    // ✅ MOSTRAR resultado
     if (error) {
       console.error(error);
       await this.dialogService.mostrarError(error.message);

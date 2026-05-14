@@ -6,17 +6,19 @@
 
     <ion-card
       class="personaje-card"
-      *ngFor="let p of misPersonajes">
+      *ngFor="let p of misPersonajes"
+    >
 
       <ion-img
-        [src]="p.imagen"
-        [alt]="p.nombre">
+        *ngIf="getPersonajeImage(p)"
+        [src]="getPersonajeImage(p)"
+        [alt]="getPersonajeName(p)">
       </ion-img>
 
       <ion-card-header>
 
         <ion-card-title>
-          {{ p.nombre }}
+          {{ getPersonajeName(p) }}
         </ion-card-title>
 
       </ion-card-header>
@@ -26,6 +28,21 @@
         <p>
           ID personaje:
           {{ p.personaje_id }}
+        </p>
+
+        <p>
+          Estado:
+          {{ getPersonajeStatus(p) }}
+        </p>
+
+        <p>
+          Especie:
+          {{ getPersonajeSpecies(p) }}
+        </p>
+
+        <p>
+          Género:
+          {{ getPersonajeGender(p) }}
         </p>
 
       </ion-card-content>

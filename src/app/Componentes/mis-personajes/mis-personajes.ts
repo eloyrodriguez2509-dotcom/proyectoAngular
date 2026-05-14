@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
 
 import { SupabaseService } from '../../Servicio/supabase';
@@ -15,7 +14,14 @@ import {
 @Component({
   selector: 'app-mis-personajes',
   standalone: true,
-  imports: [CommonModule, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg],
+  imports: [
+  CommonModule,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
+  IonImg,
+],
   templateUrl: './mis-personajes.html',
   styleUrl: './mis-personajes.css',
 })
@@ -24,7 +30,7 @@ export class MisPersonajes implements OnInit {
 
   constructor(
     private supabaseService: SupabaseService,
-    private cd: ChangeDetectorRef,
+    private cd: ChangeDetectorRef
   ) {}
 
   async ngOnInit() {
@@ -32,18 +38,37 @@ export class MisPersonajes implements OnInit {
   }
 
   async cargarMisPersonajes() {
-    const { data, error } = await this.supabaseService.supabase.from('user_personajes').select('*');
+    const { data, error } = await this.supabaseService.supabase
+      .from('user_personajes')
+      .select('*');
 
     if (error) {
       console.error(error);
-
       alert('Error al cargar tus personajes');
-
       return;
     }
 
     this.misPersonajes = data || [];
-
     this.cd.detectChanges();
+  }
+
+  getPersonajeImage(personaje: any): string {
+    return personaje?.imagen || personaje?.image || '';
+  }
+
+  getPersonajeName(personaje: any): string {
+    return personaje?.nombre || personaje?.name || 'Sin nombre';
+  }
+
+  getPersonajeStatus(personaje: any): string {
+    return personaje?.estado || personaje?.status || 'Sin estado';
+  }
+
+  getPersonajeSpecies(personaje: any): string {
+    return personaje?.especie || personaje?.species || 'Sin especie';
+  }
+
+  getPersonajeGender(personaje: any): string {
+    return personaje?.genero || personaje?.gender || 'Sin género';
   }
 }
