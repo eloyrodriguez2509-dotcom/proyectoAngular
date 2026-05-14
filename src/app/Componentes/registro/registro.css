@@ -1,0 +1,219 @@
+.registro {
+  min-height: 100vh;
+  padding: 80px 30px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.registro h1 {
+  color: #00c8ff;
+  font-size: 38px;
+  margin-bottom: 24px;
+  font-weight: 900;
+  letter-spacing: 1px;
+
+  text-shadow:
+    0 0 12px rgba(0, 200, 255, 0.75),
+    0 0 28px rgba(0, 200, 255, 0.45);
+}
+
+ion-card {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 30px;
+
+  --background: linear-gradient(
+    180deg,
+    rgba(25, 25, 25, 0.98),
+    rgba(12, 25, 42, 0.96)
+  );
+
+  border-radius: 26px;
+  border: 1px solid rgba(0, 200, 255, 0.35);
+
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(0, 200, 255, 0.28);
+
+  backdrop-filter: blur(12px);
+  animation: aparecerRegistro 0.5s ease;
+}
+
+ion-card-title {
+  color: #00eaff;
+  font-size: 28px;
+  font-weight: 900;
+  text-align: center;
+
+  text-shadow:
+    0 0 10px rgba(0, 234, 255, 0.55);
+}
+
+ion-card-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.campo label {
+  color: #00eaff;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  padding-left: 6px;
+
+  text-shadow:
+    0 0 8px rgba(0, 234, 255, 0.55);
+
+  transition: 0.3s ease;
+}
+
+.campo:focus-within label {
+  color: #7dff00;
+
+  text-shadow:
+    0 0 12px rgba(125, 255, 0, 0.75),
+    0 0 24px rgba(0, 234, 255, 0.4);
+
+  transform: translateX(4px);
+}
+
+.input-registro {
+  --background: transparent;
+
+  background: linear-gradient(
+    135deg,
+    rgba(42, 42, 42, 0.98),
+    rgba(55, 55, 55, 0.96)
+  );
+
+  --color: #ffffff;
+  --placeholder-color: #bdbdbd;
+  --placeholder-opacity: 1;
+
+  --padding-start: 18px;
+  --padding-end: 18px;
+
+  height: 58px;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  border: 2px solid rgba(0, 200, 255, 0.18);
+
+  font-size: 16px;
+  font-weight: 600;
+
+  box-shadow:
+    inset 0 0 10px rgba(255, 255, 255, 0.03),
+    0 0 12px rgba(0, 200, 255, 0.14);
+
+  transition: 0.3s ease;
+}
+
+.input-registro:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 0 18px rgba(0, 200, 255, 0.25);
+}
+
+.input-registro:focus-within {
+  border: 2px solid rgba(0, 255, 204, 0.8);
+
+  transform: scale(1.02);
+
+  box-shadow:
+    0 0 18px rgba(0, 255, 204, 0.42),
+    0 0 30px rgba(0, 200, 255, 0.25);
+}
+
+ion-input::part(native) {
+  color: #ffffff;
+  background: transparent;
+  caret-color: #00ffcc;
+  font-weight: 600;
+  background: transparent !important;
+}
+
+ion-button {
+  margin-top: 8px;
+
+  --background: linear-gradient(
+    135deg,
+    #00eaff,
+    #008cff
+  );
+
+  --color: white;
+  --border-radius: 16px;
+
+  height: 52px;
+
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 1px;
+
+  transition: 0.3s ease;
+}
+
+ion-button:hover {
+  transform: translateY(-2px) scale(1.03);
+
+  box-shadow:
+    0 8px 22px rgba(0, 200, 255, 0.55);
+}
+
+@keyframes aparecerRegistro {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .registro {
+    padding: 70px 18px;
+  }
+
+  .registro h1 {
+    font-size: 32px;
+  }
+
+  ion-card {
+    max-width: 320px;
+    padding: 24px;
+  }
+}
+
+.input-registro::part(native):-webkit-autofill,
+.input-registro::part(native):-webkit-autofill:hover,
+.input-registro::part(native):-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #2f2f2f inset;
+  box-shadow: 0 0 0 1000px #2f2f2f inset;
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #00ffcc;
+}
+
+.error {
+  color: #ff4d4d;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 2px 0 0 6px;
+
+  text-shadow:
+    0 0 8px rgba(255, 77, 77, 0.55);
+}

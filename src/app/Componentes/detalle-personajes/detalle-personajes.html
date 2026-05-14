@@ -1,0 +1,35 @@
+<section class="detalle ion-padding">
+  <a routerLink="/personajes" class="btn-volver"> ← Volver </a>
+
+  <ion-card *ngIf="personaje">
+    <ion-img [src]="personaje.image" [alt]="personaje.name"> </ion-img>
+
+    <ion-card-header>
+      <ion-card-title>
+        {{ personaje.name }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>
+        <span>Estado:</span>
+        {{ personaje.status }}
+      </p>
+
+      <p>
+        <span>Especie:</span>
+        {{ personaje.species }}
+      </p>
+
+      <p>
+        <span>Género:</span>
+        {{ personaje.gender }}
+      </p>
+
+      <p>
+        <span>Origen:</span>
+        {{ personaje.origin.name }}
+      </p>
+    </ion-card-content>
+  </ion-card>
+</section>

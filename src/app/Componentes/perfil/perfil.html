@@ -1,0 +1,51 @@
+<section class="perfil ion-padding">
+
+  <h1>Mi perfil</h1>
+
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-title>Perfil usuario</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-img
+        *ngIf="avatarUrl"
+        [src]="avatarUrl"
+        class="avatar">
+      </ion-img>
+
+      <div *ngIf="!avatarUrl" class="avatar placeholder">
+        Sin avatar
+      </div>
+
+      <ion-list>
+
+        <ion-item>
+          <ion-label>
+            {{ user?.email || 'No hay usuario cargado' }}
+          </ion-label>
+        </ion-item>
+
+      </ion-list>
+
+      <label class="upload">
+        Cambiar avatar
+
+        <input
+          type="file"
+          accept="image/*"
+          (change)="subirAvatar($event)"
+        />
+      </label>
+
+      <p *ngIf="loading">
+        Subiendo imagen...
+      </p>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</section>

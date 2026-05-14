@@ -1,0 +1,37 @@
+<section class="mis-personajes-page ion-padding">
+
+  <h2>Mis personajes favoritos</h2>
+
+  <div class="contenedor">
+
+    <ion-card
+      class="personaje-card"
+      *ngFor="let p of misPersonajes">
+
+      <ion-img
+        [src]="p.imagen"
+        [alt]="p.nombre">
+      </ion-img>
+
+      <ion-card-header>
+
+        <ion-card-title>
+          {{ p.nombre }}
+        </ion-card-title>
+
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <p>
+          ID personaje:
+          {{ p.personaje_id }}
+        </p>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+</section>

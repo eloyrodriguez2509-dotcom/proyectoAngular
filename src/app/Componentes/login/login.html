@@ -1,0 +1,111 @@
+<section class="login ion-padding">
+
+  <h1>Login</h1>
+
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-title>
+        Iniciar sesión
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+        <div class="campo">
+
+          <label>Email</label>
+
+          <ion-input
+            class="input-login"
+            type="email"
+            placeholder="Introduce tu email"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            formControlName="email">
+          </ion-input>
+
+          @if (loginForm.get('email')?.touched &&
+          loginForm.get('email')?.errors?.['required']) {
+
+            <p class="error">
+              El email es obligatorio
+            </p>
+
+          }
+
+          @if (loginForm.get('email')?.touched &&
+          loginForm.get('email')?.errors?.['email']) {
+
+            <p class="error">
+              Email inválido
+            </p>
+
+          }
+
+        </div>
+
+        <div class="campo">
+
+          <label>Contraseña</label>
+
+          <ion-input
+            class="input-login"
+            type="password"
+            placeholder="Introduce tu contraseña"
+            autocomplete="new-password"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            formControlName="password">
+          </ion-input>
+
+          @if (loginForm.get('password')?.touched &&
+          loginForm.get('password')?.errors?.['required']) {
+
+            <p class="error">
+              La contraseña es obligatoria
+            </p>
+
+          }
+
+          @if (loginForm.get('password')?.touched &&
+          loginForm.get('password')?.errors?.['minlength']) {
+
+            <p class="error">
+              Mínimo 6 caracteres
+            </p>
+
+          }
+
+        </div>
+
+        <ion-button
+          expand="block"
+          type="submit">
+
+          Iniciar sesión
+
+        </ion-button>
+
+      </form>
+
+      <p class="registro-link">
+
+        ¿No tienes cuenta todavía?
+
+        <a routerLink="/registro">
+          Regístrate aquí
+        </a>
+
+      </p>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</section>

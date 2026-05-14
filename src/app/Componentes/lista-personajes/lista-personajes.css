@@ -1,0 +1,172 @@
+:host {
+  display: block;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(circle at top left, rgba(0, 255, 170, 0.35), transparent 30%),
+    radial-gradient(circle at top right, rgba(0, 100, 255, 0.35), transparent 35%),
+    linear-gradient(135deg, #090918, #111827);
+
+  padding: 24px;
+
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+
+/* TÍTULO */
+h2 {
+  color: #b6ff00;
+  font-size: 42px;
+  text-align: center;
+  margin-bottom: 32px;
+
+  text-shadow:
+    0 0 8px #00ffcc,
+    0 0 18px #00ffcc;
+}
+
+/* CONTENEDOR */
+.contenedor {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 28px;
+
+  padding: 20px;
+}
+
+/* CARD */
+.card-personaje {
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+
+  --background:
+    linear-gradient(
+      145deg,
+      rgba(0, 255, 204, 0.95),
+      rgba(0, 102, 255, 0.95)
+    );
+
+  border-radius: 22px;
+
+  border: 2px solid rgba(182, 255, 0, 0.8);
+
+  box-shadow:
+    0 0 18px rgba(0, 255, 204, 0.55),
+    0 12px 30px rgba(0, 0, 0, 0.45);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* EFECTO */
+.card-personaje::before {
+  content: '';
+
+  position: absolute;
+
+  width: 130px;
+  height: 130px;
+
+  background: rgba(182, 255, 0, 0.25);
+
+  border-radius: 50%;
+
+  top: -45px;
+  right: -45px;
+
+  filter: blur(2px);
+}
+
+/* HOVER */
+.card-personaje:hover {
+  transform: translateY(-8px) scale(1.04);
+
+  box-shadow:
+    0 0 28px rgba(182, 255, 0, 0.9),
+    0 18px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* LINK */
+.card-personaje a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* IMAGEN */
+.card-personaje img {
+  width: calc(100% - 36px);
+  height: 260px;
+
+  object-fit: cover;
+
+  border-radius: 16px;
+
+  margin: 18px;
+
+  border: 3px solid #b6ff00;
+
+  box-shadow:
+    0 0 14px rgba(182, 255, 0, 0.8);
+}
+
+/* NOMBRE */
+ion-card-title {
+  font-size: 22px;
+
+  color: #07111f;
+  font-weight: 900;
+
+  text-align: center;
+}
+
+/* TEXTO */
+ion-card-content p {
+  font-size: 15px;
+  font-weight: bold;
+
+  background: rgba(255, 255, 255, 0.35);
+
+  padding: 10px;
+
+  border-radius: 12px;
+
+  margin-bottom: 10px;
+
+  color: #07111f;
+}
+
+/* BOTÓN FAVORITOS */
+.btn-favorito {
+  position: relative;
+  z-index: 2;
+
+  margin: 14px 18px 18px;
+
+  --background: #06121f;
+  --color: #b6ff00;
+
+  --border-radius: 14px;
+
+  font-size: 15px;
+  font-weight: 900;
+
+  box-shadow:
+    0 0 12px rgba(182, 255, 0, 0.75),
+    inset 0 0 8px rgba(0, 255, 204, 0.35);
+
+  transition: 0.2s ease;
+}
+
+/* HOVER BOTÓN */
+.btn-favorito:hover {
+  transform: scale(1.04);
+
+  --background: #b6ff00;
+  --color: #06121f;
+
+  box-shadow:
+    0 0 20px rgba(182, 255, 0, 1),
+    0 0 30px rgba(0, 255, 204, 0.7);
+}

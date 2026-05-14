@@ -1,0 +1,87 @@
+<section class="registro ion-padding">
+
+  <h1>Registro</h1>
+
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-title>Crear cuenta</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <form [formGroup]="registroForm" (ngSubmit)="registro()">
+
+        <div class="campo">
+
+          <label>Email</label>
+
+          <ion-input
+            class="input-registro"
+            type="email"
+            placeholder="Introduce tu email"
+            autocomplete="off"
+            formControlName="email">
+          </ion-input>
+
+          @if (registroForm.get('email')?.touched &&
+          registroForm.get('email')?.errors?.['required']) {
+
+            <p class="error">El email es obligatorio</p>
+
+          }
+
+          @if (registroForm.get('email')?.touched &&
+          registroForm.get('email')?.errors?.['email']) {
+
+            <p class="error">Email inválido</p>
+
+          }
+
+        </div>
+
+        <div class="campo">
+
+          <label>Contraseña</label>
+
+          <ion-input
+            class="input-registro"
+            type="password"
+            placeholder="Introduce tu contraseña"
+            autocomplete="new-password"
+            formControlName="password">
+          </ion-input>
+
+          @if (registroForm.get('password')?.touched &&
+          registroForm.get('password')?.errors?.['required']) {
+
+            <p class="error">La contraseña es obligatoria</p>
+
+          }
+
+          @if (registroForm.get('password')?.touched &&
+          registroForm.get('password')?.errors?.['minlength']) {
+
+            <p class="error">
+              Mínimo 6 caracteres
+            </p>
+
+          }
+
+        </div>
+
+        <ion-button
+          expand="block"
+          type="submit">
+
+          Registrarse
+
+        </ion-button>
+
+      </form>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</section>

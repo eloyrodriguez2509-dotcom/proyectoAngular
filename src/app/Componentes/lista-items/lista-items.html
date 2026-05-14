@@ -1,0 +1,78 @@
+<section class="items-page ion-padding">
+  <h2>Items</h2>
+
+  <div class="container">
+    <ion-card
+      class="item-card"
+      *ngFor="let item of items; let i = index"
+      (click)="openPopup(item)"
+    >
+      <img
+        *ngIf="getItemImage(item)"
+        [src]="getItemImage(item)"
+        [alt]="getItemName(item)"
+      />
+
+      <ion-card-header>
+        <ion-card-title>
+          Item #{{ getItemNumber(item, i) }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>{{ getItemDescription(item) }}</p>
+
+        <ion-button
+          expand="block"
+          class="btn-guardar"
+          (click)="agregarAMisItems(item, i); $event.stopPropagation()"
+        >
+          Añadir a mis items
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div
+    class="modal-backdrop"
+    *ngIf="selectedItem"
+    (click)="closePopup()"
+  >
+    <ion-card
+      class="modal-card"
+      (click)="$event.stopPropagation()"
+    >
+      <ion-button
+        class="close-btn"
+        fill="clear"
+        (click)="closePopup()"
+      >
+        ✕
+      </ion-button>
+
+      <img
+        *ngIf="getItemImage(selectedItem)"
+        [src]="getItemImage(selectedItem)"
+        [alt]="getItemName(selectedItem)"
+      />
+
+      <ion-card-header>
+        <ion-card-title>
+          {{ getItemName(selectedItem) }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>
+          <strong>ID:</strong>
+          {{ getItemNumber(selectedItem) }}
+        </p>
+
+        <p>
+          <strong>Descripción:</strong>
+          {{ getItemDescription(selectedItem) }}
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</section>

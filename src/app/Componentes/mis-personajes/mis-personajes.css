@@ -1,0 +1,145 @@
+:host {
+  display: block;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(circle at top left, rgba(0, 255, 170, 0.35), transparent 30%),
+    radial-gradient(circle at top right, rgba(0, 100, 255, 0.35), transparent 35%),
+    linear-gradient(135deg, #090918, #111827);
+
+  padding: 24px;
+
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+
+/* TÍTULO */
+h2 {
+  color: #b6ff00;
+  font-size: 42px;
+  text-align: center;
+  margin-bottom: 32px;
+
+  text-shadow:
+    0 0 8px #00ffcc,
+    0 0 18px #00ffcc;
+}
+
+/* CONTENEDOR */
+.contenedor {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 28px;
+
+  padding: 20px;
+}
+
+/* CARD */
+.personaje-card {
+  position: relative;
+  overflow: hidden;
+
+  --background:
+    linear-gradient(
+      145deg,
+      rgba(0, 255, 204, 0.95),
+      rgba(0, 102, 255, 0.95)
+    );
+
+  border-radius: 22px;
+
+  border: 2px solid rgba(182, 255, 0, 0.8);
+
+  box-shadow:
+    0 0 18px rgba(0, 255, 204, 0.55),
+    0 12px 30px rgba(0, 0, 0, 0.45);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* EFECTO */
+.personaje-card::before {
+  content: '';
+
+  position: absolute;
+
+  width: 130px;
+  height: 130px;
+
+  background: rgba(182, 255, 0, 0.25);
+
+  border-radius: 50%;
+
+  top: -45px;
+  right: -45px;
+
+  filter: blur(2px);
+}
+
+/* HOVER */
+.personaje-card:hover {
+  transform: translateY(-8px) scale(1.04);
+
+  box-shadow:
+    0 0 28px rgba(182, 255, 0, 0.9),
+    0 18px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* IMAGEN */
+ion-img {
+  width: calc(100% - 36px);
+  height: 240px;
+
+  object-fit: cover;
+
+  border-radius: 16px;
+
+  margin: 18px;
+
+  overflow: hidden;
+
+  border: 3px solid #b6ff00;
+
+  box-shadow:
+    0 0 14px rgba(182, 255, 0, 0.8);
+}
+
+/* NOMBRE */
+ion-card-title {
+  font-size: 22px;
+
+  color: #07111f;
+  font-weight: 900;
+
+  text-align: center;
+}
+
+/* TEXTO */
+ion-card-content p {
+  font-size: 15px;
+  font-weight: bold;
+
+  background: rgba(255, 255, 255, 0.35);
+
+  padding: 10px;
+
+  border-radius: 12px;
+
+  color: #07111f;
+}
+
+/* MENSAJE VACÍO */
+.empty-message {
+  text-align: center;
+  margin-top: 40px;
+
+  color: #b6ff00;
+
+  font-size: 22px;
+  font-weight: bold;
+
+  text-shadow:
+    0 0 8px #00ffcc,
+    0 0 16px #00ffcc;
+}

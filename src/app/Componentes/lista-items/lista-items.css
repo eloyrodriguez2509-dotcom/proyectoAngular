@@ -1,0 +1,215 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(0, 255, 170, 0.35), transparent 30%),
+    radial-gradient(circle at top right, rgba(0, 100, 255, 0.35), transparent 35%),
+    linear-gradient(135deg, #090918, #111827);
+  padding: 24px;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+
+h2 {
+  color: #b6ff00;
+  font-size: 42px;
+  text-align: center;
+  margin-bottom: 32px;
+  text-shadow: 0 0 8px #00ffcc, 0 0 18px #00ffcc;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 28px;
+  padding: 20px;
+}
+
+.item-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  --background: linear-gradient(145deg, rgba(0, 255, 204, 0.95), rgba(0, 102, 255, 0.95));
+
+  color: #07111f;
+  border: 2px solid rgba(182, 255, 0, 0.8);
+  border-radius: 22px;
+
+  box-shadow:
+    0 0 18px rgba(0, 255, 204, 0.55),
+    0 12px 30px rgba(0, 0, 0, 0.45);
+
+  transition: 0.25s ease;
+}
+
+.item-card::before {
+  content: '';
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  background: rgba(182, 255, 0, 0.25);
+  border-radius: 50%;
+  top: -45px;
+  right: -45px;
+  filter: blur(2px);
+}
+
+.item-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow:
+    0 0 28px rgba(182, 255, 0, 0.9),
+    0 18px 40px rgba(0, 0, 0, 0.55);
+}
+
+.item-card img {
+  width: calc(100% - 36px);
+  height: 170px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 18px;
+  border: 3px solid #b6ff00;
+  box-shadow: 0 0 14px rgba(182, 255, 0, 0.8);
+}
+
+ion-card-title {
+  color: #07111f;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+ion-card-content p {
+  color: #07111f;
+  font-size: 16px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.35);
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.btn-guardar {
+  position: relative;
+  z-index: 2;
+  margin-top: 14px;
+
+  --background: #06121f;
+  --color: #b6ff00;
+  --border-radius: 14px;
+
+  font-size: 15px;
+  font-weight: 900;
+
+  box-shadow:
+    0 0 12px rgba(182, 255, 0, 0.75),
+    inset 0 0 8px rgba(0, 255, 204, 0.35);
+}
+
+.btn-guardar:hover {
+  transform: scale(1.04);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(3, 5, 18, 0.85);
+  backdrop-filter: blur(12px);
+
+  animation: fadeIn 0.25s ease;
+}
+
+.modal-card {
+  position: relative;
+  width: min(420px, 90%);
+  padding: 28px;
+
+  text-align: center;
+
+  --background:
+    radial-gradient(circle at top right, rgba(182, 255, 0, 0.35), transparent 30%),
+    linear-gradient(145deg, #00ffcc, #0066ff);
+
+  border: 3px solid #b6ff00;
+  border-radius: 28px;
+
+  color: #06121f;
+
+  box-shadow:
+    0 0 35px rgba(182, 255, 0, 0.9),
+    0 0 70px rgba(0, 255, 204, 0.45),
+    0 25px 70px rgba(0, 0, 0, 0.75);
+
+  animation: popupIn 0.28s ease;
+}
+
+.modal-card img {
+  width: 190px;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 22px;
+  border: 4px solid #b6ff00;
+  margin: 18px auto;
+  box-shadow:
+    0 0 18px #b6ff00,
+    0 0 35px rgba(0, 255, 204, 0.8);
+}
+
+.modal-card ion-card-title {
+  color: #06121f;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.modal-card p {
+  color: #06121f;
+  font-size: 15px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.38);
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.modal-card strong {
+  color: #b6ff00;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  --background: #06121f;
+  --color: #b6ff00;
+  --border-radius: 50%;
+
+  width: 38px;
+  height: 38px;
+
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.close-btn:hover {
+  transform: rotate(90deg) scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popupIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(0,255,170,0.2), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(0,100,255,0.2), transparent 30%),
+    linear-gradient(135deg, #050510, #0b0f2a);
+}
+
+:root {
+  --rm-dark: #06121f;
+  --rm-darker: #020812;
+  --rm-cyan: #00ffcc;
+  --rm-blue: #0099ff;
+  --rm-green: #b6ff00;
+  --rm-red: #ff2d55;
+  --rm-orange: #ffaa00;
+}
+
+/* ================= TOASTS ================= */
+
+ion-toast.toast-exito,
+ion-toast.toast-error,
+ion-toast.toast-info,
+ion-toast.toast-advertencia {
+  --border-radius: 20px;
+  --box-shadow:
+    0 0 22px rgba(0,255,204,0.9),
+    0 0 45px rgba(182,255,0,0.45);
+
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+ion-toast.toast-exito {
+  --background: linear-gradient(135deg, #00ffcc 0%, #00ff88 55%, #b6ff00 100%);
+  --color: #06121f;
+}
+
+ion-toast.toast-info {
+  --background: linear-gradient(135deg, #0066ff 0%, #00ccff 60%, #00ffcc 100%);
+  --color: #ffffff;
+}
+
+ion-toast.toast-advertencia {
+  --background: linear-gradient(135deg, #ffdd00 0%, #ffaa00 60%, #ff7700 100%);
+  --color: #06121f;
+}
+
+ion-toast.toast-error {
+  --background: linear-gradient(135deg, #ff4466 0%, #ff1144 60%, #9b0033 100%);
+  --color: #ffffff;
+}
+
+ion-toast.toast-exito::part(container),
+ion-toast.toast-error::part(container),
+ion-toast.toast-info::part(container),
+ion-toast.toast-advertencia::part(container) {
+  border: 2px solid #b6ff00;
+  border-radius: 20px;
+  animation: toastPortal 0.55s ease both, portalGlow 1.8s infinite alternate;
+}
+
+ion-toast.toast-exito::part(message),
+ion-toast.toast-error::part(message),
+ion-toast.toast-info::part(message),
+ion-toast.toast-advertencia::part(message) {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 5px rgba(255,255,255,0.75),
+    0 0 12px rgba(0,255,204,0.9);
+  animation: glitchText 1.8s infinite;
+}
+
+/* ================= ALERTAS ================= */
+
+ion-alert.alert-custom {
+  --backdrop-opacity: 0.7;
+}
+
+ion-alert.alert-custom .alert-wrapper {
+  background: linear-gradient(135deg, #00ffcc 0%, #0099ff 100%) !important;
+  border: 3px solid #b6ff00 !important;
+  border-radius: 24px !important;
+  box-shadow:
+    0 0 35px rgba(0, 255, 204, 0.95),
+    0 0 80px rgba(182, 255, 0, 0.45) !important;
+  animation: alertPortal 0.45s ease both !important;
+}
+
+ion-alert.alert-custom .alert-title {
+  color: #06121f !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 22px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+}
+
+ion-alert.alert-custom .alert-message {
+  color: #06121f !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+}
+
+ion-alert.alert-custom .alert-button {
+  color: #06121f !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  border-radius: 14px !important;
+  margin: 6px !important;
+}
+
+ion-alert.alert-custom .alert-cancel {
+  background: rgba(255,255,255,0.45) !important;
+  border: 2px solid #06121f !important;
+}
+
+ion-alert.alert-custom .alert-confirm {
+  background: linear-gradient(135deg, #00ff88, #b6ff00) !important;
+  border: 2px solid #06121f !important;
+  box-shadow: 0 0 15px rgba(182,255,0,0.9) !important;
+}
+
+ion-alert.alert-custom .alert-danger {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #ff4466, #ff1144) !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* ================= BOTONES ================= */
+
+ion-button {
+  --border-radius: 16px;
+  --background: linear-gradient(135deg, #06121f 0%, #020812 100%);
+  --color: #b6ff00;
+  --border-color: #00ffcc;
+  --border-style: solid;
+  --border-width: 2px;
+  --box-shadow:
+    0 0 16px rgba(0, 255, 204, 0.75),
+    inset 0 0 12px rgba(182, 255, 0, 0.16);
+
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+ion-button:hover {
+  filter: brightness(1.18);
+}
+
+ion-button:active {
+  transform: scale(0.96);
+}
+
+ion-button.btn-favorito {
+  --background: linear-gradient(135deg, #020812 0%, #06121f 100%);
+  --color: #b6ff00;
+  --border-color: #00ffcc;
+  --box-shadow:
+    0 0 18px rgba(0, 255, 204, 0.9),
+    0 0 35px rgba(182, 255, 0, 0.4);
+}
+
+ion-button.btn-danger {
+  --background: linear-gradient(135deg, #ff4466 0%, #ff1144 100%);
+  --color: #ffffff;
+  --border-color: #ff6688;
+}
+
+ion-button.btn-confirm {
+  --background: linear-gradient(135deg, #00ff88 0%, #b6ff00 100%);
+  --color: #06121f;
+  --border-color: #00ffcc;
+}
+
+/* ================= ACTION SHEET ================= */
+
+ion-action-sheet.actionsheet-custom .action-sheet-wrapper {
+  background: linear-gradient(135deg, #06121f 0%, #020812 100%) !important;
+  border: 2px solid #00ffcc !important;
+  border-radius: 24px 24px 0 0 !important;
+  box-shadow: 0 0 35px rgba(0,255,204,0.75) !important;
+}
+
+ion-action-sheet.actionsheet-custom .action-sheet-title,
+ion-action-sheet.actionsheet-custom .action-sheet-button {
+  font-family: 'Orbitron', sans-serif !important;
+  font-weight: 900 !important;
+}
+
+ion-action-sheet.actionsheet-custom .action-sheet-title {
+  color: #b6ff00 !important;
+  text-transform: uppercase !important;
+}
+
+ion-action-sheet.actionsheet-custom .action-sheet-button {
+  color: #00ffcc !important;
+}
+
+ion-action-sheet.actionsheet-custom .action-sheet-button[role="destructive"] {
+  color: #ff4466 !important;
+}
+
+ion-action-sheet.actionsheet-custom .action-sheet-button[role="cancel"] {
+  color: #b6ff00 !important;
+}
+
+/* ================= MODAL ================= */
+
+ion-modal.modal-custom::part(content) {
+  border-radius: 24px !important;
+  border: 3px solid #b6ff00 !important;
+  background: linear-gradient(135deg, #00ffcc 0%, #0066ff 100%) !important;
+  box-shadow: 0 0 45px rgba(0,255,204,0.95) !important;
+}
+
+/* ================= ANIMACIONES ================= */
+
+@keyframes toastPortal {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.75) rotateX(25deg);
+    filter: blur(8px);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateY(8px) scale(1.04);
+    filter: blur(0);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes portalGlow {
+  from {
+    box-shadow:
+      0 0 18px rgba(0,255,204,0.7),
+      0 0 35px rgba(182,255,0,0.25);
+  }
+
+  to {
+    box-shadow:
+      0 0 35px rgba(0,255,204,1),
+      0 0 60px rgba(182,255,0,0.6);
+  }
+}
+
+@keyframes glitchText {
+  0%, 100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-1px);
+  }
+
+  50% {
+    transform: translateX(1px);
+  }
+
+  75% {
+    transform: translateX(-0.5px);
+  }
+}
+
+@keyframes alertPortal {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) rotateX(20deg);
+    filter: blur(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}

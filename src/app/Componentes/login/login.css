@@ -1,0 +1,188 @@
+.login {
+  min-height: 100vh;
+  padding: 80px 30px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.login h1 {
+  color: #00c8ff;
+  font-size: 38px;
+  margin-bottom: 24px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(0, 200, 255, 0.75);
+}
+
+ion-card {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 30px;
+  --background: linear-gradient(180deg, rgba(25, 25, 25, 0.98), rgba(12, 25, 42, 0.96));
+  border-radius: 26px;
+  border: 1px solid rgba(0, 200, 255, 0.35);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55), 0 0 28px rgba(0, 200, 255, 0.28);
+  animation: aparecer 0.5s ease;
+}
+
+ion-card-title {
+  color: #00eaff;
+  font-size: 28px;
+  font-weight: 900;
+  text-align: center;
+}
+
+ion-card-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.campo {
+  text-align: left;
+}
+
+.campo label {
+  display: block;
+  color: #00eaff;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+  padding-left: 6px;
+  text-shadow: 0 0 8px rgba(0, 234, 255, 0.55);
+  transition: 0.3s ease;
+}
+
+.campo:focus-within label {
+  color: #b6ff00;
+  text-shadow: 0 0 12px rgba(182, 255, 0, 0.9);
+  transform: translateX(4px) scale(1.03);
+}
+
+.input-login {
+  --background: transparent;
+  --color: #ffffff;
+  --placeholder-color: #bdbdbd;
+  --placeholder-opacity: 1;
+  --padding-start: 18px;
+  --padding-end: 18px;
+
+  background: linear-gradient(135deg, rgba(42, 42, 42, 0.98), rgba(55, 55, 55, 0.96));
+  height: 58px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid rgba(0, 200, 255, 0.18);
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.input-login:hover {
+  box-shadow: 0 0 18px rgba(0, 200, 255, 0.25);
+}
+
+.input-login:focus-within {
+  --color: #b6ff00;
+
+  border: 2px solid rgba(182, 255, 0, 0.85);
+  transform: scale(1.02);
+  box-shadow:
+    0 0 18px rgba(182, 255, 0, 0.45),
+    0 0 30px rgba(0, 255, 136, 0.3);
+}
+
+.input-login:focus-within::part(native) {
+  color: #b6ff00;
+}
+
+ion-input::part(native) {
+  color: #ffffff;
+  background: transparent !important;
+  caret-color: #00ffcc;
+  font-weight: 600;
+  box-shadow: none !important;
+}
+
+ion-button {
+  margin-top: 8px;
+  --background: linear-gradient(135deg, #00eaff, #008cff);
+  --color: white;
+  --border-radius: 16px;
+  height: 52px;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  transition: 0.3s ease;
+}
+
+ion-button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 22px rgba(0, 200, 255, 0.55);
+}
+
+.input-login::part(native):-webkit-autofill,
+.input-login::part(native):-webkit-autofill:hover,
+.input-login::part(native):-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #2f2f2f inset;
+  box-shadow: 0 0 0 1000px #2f2f2f inset;
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #00ffcc;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .login {
+    padding: 70px 18px;
+  }
+
+  .login h1 {
+    font-size: 32px;
+  }
+
+  ion-card {
+    max-width: 320px;
+    padding: 24px;
+  }
+}
+
+.registro-link {
+  margin-top: 5px;
+  color: #d6d6d6;
+  font-size: 14px;
+  text-align: center;
+}
+
+.registro-link a {
+  color: #00eaff;
+  font-weight: 900;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: 0.3s ease;
+}
+
+.registro-link a:hover {
+  color: #b6ff00;
+  text-shadow: 0 0 12px rgba(182, 255, 0, 0.9);
+}
+
+.error {
+  color: #ff4d4d;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 2px 0 0 6px;
+
+  text-shadow:
+    0 0 8px rgba(255, 77, 77, 0.55);
+}

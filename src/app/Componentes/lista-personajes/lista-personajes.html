@@ -1,0 +1,44 @@
+<section class="personajes-page ion-padding">
+
+  <h2>Personajes de Rick & Morty</h2>
+
+  <div class="contenedor">
+
+    <ion-card
+      class="card-personaje"
+      *ngFor="let p of personajes">
+
+      <a [routerLink]="['/personajes', p.id]">
+
+        <img
+          [src]="p.image"
+          [alt]="p.name">
+
+        <ion-card-header>
+          <ion-card-title>
+            {{ p.name }}
+          </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p>Estado: {{ p.status }}</p>
+          <p>Especie: {{ p.species }}</p>
+          <p>Origen: {{ p.origin.name }}</p>
+        </ion-card-content>
+
+      </a>
+
+      <ion-button
+        expand="block"
+        class="btn-favorito"
+        (click)="agregarAMisPersonajes(p)">
+
+        Añadir a favoritos
+
+      </ion-button>
+
+    </ion-card>
+
+  </div>
+
+</section>

@@ -1,0 +1,76 @@
+<section class="mis-items-page ion-padding">
+  <h2>Mis Items</h2>
+
+  <div class="container">
+    <ion-card
+      class="item-card"
+      *ngFor="let item of misItems; let i = index"
+      (click)="openPopup(item, i)"
+    >
+      <img
+        class="item-img"
+        *ngIf="getItemImage(item)"
+        [src]="getItemImage(item)"
+        [alt]="getItemName(item)"
+      />
+
+      <ion-card-header>
+        <ion-card-title>
+          Item #{{ getItemNumber(item, i) }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>
+          {{ getItemName(item) }}
+        </p>
+
+        <ion-button
+          class="btn-danger"
+          expand="block"
+          (click)="confirmarEliminar(item); $event.stopPropagation()"
+        >
+          Eliminar de favoritos
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</section>
+
+<!-- POPUP ITEM -->
+<div
+  class="popup-backdrop"
+  *ngIf="selectedItem"
+  (click)="closePopup()"
+>
+  <div
+    class="popup-card"
+    (click)="$event.stopPropagation()"
+  >
+    <button
+      class="popup-close"
+      (click)="closePopup()"
+    >
+      ×
+    </button>
+
+    <img
+      class="popup-img"
+      *ngIf="getItemImage(selectedItem)"
+      [src]="getItemImage(selectedItem)"
+      [alt]="getItemName(selectedItem)"
+    />
+
+    <h2>{{ getItemName(selectedItem) }}</h2>
+
+    <p>
+      <strong>ID:</strong>
+      Item #{{ getItemNumber(selectedItem, selectedItemIndex) }}
+    </p>
+
+    <p *ngIf="getItemDescription(selectedItem)">
+      <strong>Descripción:</strong>
+      {{ getItemDescription(selectedItem) }}
+    </p>
+  </div>
+</div>
