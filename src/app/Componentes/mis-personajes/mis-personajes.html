@@ -1,54 +1,51 @@
-<section class="mis-personajes-page ion-padding">
-
+<section class="personajes-page ion-padding">
   <h2>Mis personajes favoritos</h2>
 
   <div class="contenedor">
+    <ion-card class="card-personaje" *ngFor="let p of misPersonajes">
+      <a [routerLink]="['/personajes', p.personaje_id]">
+        <img
+          *ngIf="getPersonajeImage(p)"
+          [src]="getPersonajeImage(p)"
+          [alt]="getPersonajeName(p)"
+        />
 
-    <ion-card
-      class="personaje-card"
-      *ngFor="let p of misPersonajes"
-    >
+        <ion-card-header>
+          <ion-card-title>
+            {{ getPersonajeName(p) }}
+          </ion-card-title>
+        </ion-card-header>
 
-      <ion-img
-        *ngIf="getPersonajeImage(p)"
-        [src]="getPersonajeImage(p)"
-        [alt]="getPersonajeName(p)">
-      </ion-img>
+        <ion-card-content>
+          <p>
+            Estado:
+            {{ getPersonajeStatus(p) }}
+          </p>
 
-      <ion-card-header>
+          <p>
+            Especie:
+            {{ getPersonajeSpecies(p) }}
+          </p>
 
-        <ion-card-title>
-          {{ getPersonajeName(p) }}
-        </ion-card-title>
+          <p>
+            Género:
+            {{ getPersonajeGender(p) }}
+          </p>
 
-      </ion-card-header>
+          <p>
+            ID personaje:
+            {{ p.personaje_id }}
+          </p>
+        </ion-card-content>
+      </a>
 
-      <ion-card-content>
-
-        <p>
-          ID personaje:
-          {{ p.personaje_id }}
-        </p>
-
-        <p>
-          Estado:
-          {{ getPersonajeStatus(p) }}
-        </p>
-
-        <p>
-          Especie:
-          {{ getPersonajeSpecies(p) }}
-        </p>
-
-        <p>
-          Género:
-          {{ getPersonajeGender(p) }}
-        </p>
-
-      </ion-card-content>
-
+      <ion-button
+        expand="block"
+        class="btn-danger"
+        (click)="eliminarPersonaje(p); $event.stopPropagation()"
+      >
+        Eliminar de favoritos
+      </ion-button>
     </ion-card>
-
   </div>
-
 </section>

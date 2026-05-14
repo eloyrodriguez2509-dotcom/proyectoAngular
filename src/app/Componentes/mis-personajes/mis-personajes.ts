@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { RouterLink } from '@angular/router';
 import { SupabaseService } from '../../Servicio/supabase';
 
 import {
@@ -8,20 +8,13 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
-  IonImg,
+  IonButton,
 } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-mis-personajes',
   standalone: true,
-  imports: [
-  CommonModule,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonImg,
-],
+  imports: [CommonModule, RouterLink, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton],
   templateUrl: './mis-personajes.html',
   styleUrl: './mis-personajes.css',
 })
@@ -30,7 +23,7 @@ export class MisPersonajes implements OnInit {
 
   constructor(
     private supabaseService: SupabaseService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
   ) {}
 
   async ngOnInit() {
@@ -38,9 +31,7 @@ export class MisPersonajes implements OnInit {
   }
 
   async cargarMisPersonajes() {
-    const { data, error } = await this.supabaseService.supabase
-      .from('user_personajes')
-      .select('*');
+    const { data, error } = await this.supabaseService.supabase.from('user_personajes').select('*');
 
     if (error) {
       console.error(error);
@@ -49,6 +40,25 @@ export class MisPersonajes implements OnInit {
     }
 
     this.misPersonajes = data || [];
+    this.cd.detectChanges();
+  }
+
+  async eliminarPersonaje(personaje: any) {
+    const { error } = await this.supabaseService.supabase
+      .from('user_personajes')
+      .delete()
+      .eq('personaje_id', personaje.personaje_id);
+
+    if (error) {
+      console.error(error);
+      alert('Error al eliminar personaje');
+      return;
+    }
+
+    this.misPersonajes = this.misPersonajes.filter(
+      (p) => p.personaje_id !== personaje.personaje_id,
+    );
+
     this.cd.detectChanges();
   }
 
