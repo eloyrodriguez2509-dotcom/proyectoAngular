@@ -111,7 +111,7 @@ export class MisItems implements OnInit {
     const { error } = await this.supabaseService.supabase
       .from('user_items')
       .delete()
-      .eq('id', item.id);
+      .eq('item_id', item.item_id);
 
     if (error) {
       console.error(error);
@@ -119,8 +119,11 @@ export class MisItems implements OnInit {
       return;
     }
 
+    this.misItems = this.misItems.filter((i) => i.item_id !== item.item_id);
+
     this.closePopup();
-    await this.cargarMisItems();
+    this.cd.detectChanges();
+
     await this.dialogService.mostrarExito('Item eliminado de favoritos');
   }
 
