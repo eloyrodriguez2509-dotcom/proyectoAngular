@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { SupabaseService } from '../../Servicio/supabase';
+import { DialogService } from '../../Servicio/dialog';
 
 import {
   IonCard,
@@ -14,7 +15,15 @@ import {
 @Component({
   selector: 'app-mis-personajes',
   standalone: true,
-  imports: [CommonModule, RouterLink, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton],
+  imports: [
+    CommonModule,
+    RouterLink,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonButton,
+  ],
   templateUrl: './mis-personajes.html',
   styleUrl: './mis-personajes.css',
 })
@@ -24,6 +33,7 @@ export class MisPersonajes implements OnInit {
   constructor(
     private supabaseService: SupabaseService,
     private cd: ChangeDetectorRef,
+    private dialogService: DialogService,
   ) {}
 
   async ngOnInit() {
@@ -44,6 +54,13 @@ export class MisPersonajes implements OnInit {
   }
 
   async eliminarPersonaje(personaje: any) {
+    const confirmado = await this.dialogService.confirmarBorrar(this.getPersonajeName(personaje));
+
+    if (!confirmado) {
+      await this.dialogService.mostrarInfo('Operación cancelada');
+      return;
+    }
+
     const { error } = await this.supabaseService.supabase
       .from('user_personajes')
       .delete()
@@ -51,7 +68,7 @@ export class MisPersonajes implements OnInit {
 
     if (error) {
       console.error(error);
-      alert('Error al eliminar personaje');
+      await this.dialogService.mostrarError('Error al eliminar personaje');
       return;
     }
 
@@ -60,6 +77,8 @@ export class MisPersonajes implements OnInit {
     );
 
     this.cd.detectChanges();
+
+    await this.dialogService.mostrarExito('Personaje eliminado de favoritos');
   }
 
   getPersonajeImage(personaje: any): string {
