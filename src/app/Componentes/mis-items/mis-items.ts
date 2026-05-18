@@ -35,17 +35,31 @@ export class MisItems implements OnInit {
   }
 
   async cargarMisItems() {
-    const { data, error } = await this.supabaseService.supabase.from('user_items').select(`
-    id,
-    user_id,
-    item_id,
-    nombre,
-    items (
+    const {
+      data: { user },
+    } = await this.supabaseService.supabase.auth.getUser();
+
+    if (!user) {
+      this.misItems = [];
+      return;
+    }
+
+    const { data, error } = await this.supabaseService.supabase
+      .from('user_items')
+      .select(
+        `
       id,
-      description,
-      image
-    )
-  `);
+      user_id,
+      item_id,
+      nombre,
+      items (
+        id,
+        description,
+        image
+      )
+    `,
+      )
+      .eq('user_id', user.id);
 
     if (error) {
       console.error(error);
@@ -108,14 +122,25 @@ export class MisItems implements OnInit {
   }
 
   async eliminarItem(item: any) {
-    const { error } = await this.supabaseService.supabase
+    const { data, error } = await this.supabaseService.supabase
       .from('user_items')
       .delete()
-      .eq('item_id', item.item_id);
+      .eq('user_id', item.user_id)
+      .eq('item_id', item.item_id)
+      .select();
+
+    console.log('BORRADO:', data);
+    console.log('ERROR DELETE:', error);
 
     if (error) {
-      console.error(error);
-      await this.dialogService.mostrarError('Error al eliminar item');
+      await this.dialogService.mostrarError(error.message);
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      await this.dialogService.mostrarError(
+        'No se pudo borrar. Revisa las políticas RLS de Supabase.',
+      );
       return;
     }
 

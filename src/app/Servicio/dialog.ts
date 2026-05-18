@@ -69,12 +69,11 @@ export class DialogService {
   }
 
   // ===== TOASTS =====
-  // ===== TOASTS =====
   async mostrarExito(mensaje: string) {
     const toast = await this.toastCtrl.create({
       message: `✅ ${mensaje}`,
       duration: 2500,
-      position: 'top',
+      position: 'bottom',
       cssClass: 'toast-exito',
     });
 
@@ -85,7 +84,7 @@ export class DialogService {
     const toast = await this.toastCtrl.create({
       message: `❌ ${mensaje}`,
       duration: 3000,
-      position: 'top',
+      position: 'bottom',
       cssClass: 'toast-error',
     });
 
@@ -96,7 +95,7 @@ export class DialogService {
     const toast = await this.toastCtrl.create({
       message: `ℹ️ ${mensaje}`,
       duration: 2500,
-      position: 'top',
+      position: 'bottom',
       cssClass: 'toast-info',
     });
 
@@ -107,7 +106,7 @@ export class DialogService {
     const toast = await this.toastCtrl.create({
       message: `⚠️ ${mensaje}`,
       duration: 2800,
-      position: 'top',
+      position: 'bottom',
       cssClass: 'toast-advertencia',
     });
 

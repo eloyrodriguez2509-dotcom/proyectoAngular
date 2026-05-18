@@ -41,7 +41,19 @@ export class MisPersonajes implements OnInit {
   }
 
   async cargarMisPersonajes() {
-    const { data, error } = await this.supabaseService.supabase.from('user_personajes').select('*');
+    const {
+      data: { user },
+    } = await this.supabaseService.supabase.auth.getUser();
+
+    if (!user) {
+      this.misPersonajes = [];
+      return;
+    }
+
+    const { data, error } = await this.supabaseService.supabase
+      .from('user_personajes')
+      .select('*')
+      .eq('user_id', user.id);
 
     if (error) {
       console.error(error);
@@ -61,14 +73,26 @@ export class MisPersonajes implements OnInit {
       return;
     }
 
-    const { error } = await this.supabaseService.supabase
+    const { data, error } = await this.supabaseService.supabase
       .from('user_personajes')
       .delete()
-      .eq('personaje_id', personaje.personaje_id);
+      .eq('user_id', personaje.user_id)
+      .eq('personaje_id', personaje.personaje_id)
+      .select();
+
+    console.log('PERSONAJE BORRADO:', data);
+    console.log('ERROR:', error);
 
     if (error) {
       console.error(error);
       await this.dialogService.mostrarError('Error al eliminar personaje');
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      await this.dialogService.mostrarError(
+        'No se pudo borrar. Revisa la policy DELETE de user_personajes.',
+      );
       return;
     }
 

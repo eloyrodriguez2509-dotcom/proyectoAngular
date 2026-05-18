@@ -11,7 +11,7 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
-  IonButton
+  IonButton,
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -25,7 +25,7 @@ import {
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
-    IonButton
+    IonButton,
   ],
   templateUrl: './lista-personajes.html',
   styleUrls: ['./lista-personajes.css'],
@@ -77,8 +77,25 @@ export class ListaPersonajes implements OnInit {
       return;
     }
 
+    const { data: repetido, error: errorBuscar } = await this.supabaseService.supabase
+      .from('user_personajes')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('personaje_id', personaje.id);
+
+    if (errorBuscar) {
+      console.error(errorBuscar);
+      await this.dialogService.mostrarError('Error comprobando personaje');
+      return;
+    }
+
+    if (repetido && repetido.length > 0) {
+      await this.dialogService.mostrarError('Personaje repetido');
+      return;
+    }
+
     const confirmado = await this.dialogService.confirmarAgregarItem(
-      this.getPersonajeName(personaje)
+      this.getPersonajeName(personaje),
     );
 
     if (!confirmado) {
@@ -86,14 +103,12 @@ export class ListaPersonajes implements OnInit {
       return;
     }
 
-    const { error } = await this.supabaseService.supabase
-      .from('user_personajes')
-      .insert({
-        user_id: user.id,
-        personaje_id: personaje.id,
-        nombre: this.getPersonajeName(personaje),
-        imagen: this.getPersonajeImage(personaje),
-      });
+    const { error } = await this.supabaseService.supabase.from('user_personajes').insert({
+      user_id: user.id,
+      personaje_id: personaje.id,
+      nombre: this.getPersonajeName(personaje),
+      imagen: this.getPersonajeImage(personaje),
+    });
 
     if (error) {
       console.error(error);

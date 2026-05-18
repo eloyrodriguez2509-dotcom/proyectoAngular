@@ -76,6 +76,23 @@ export class ListaItems implements OnInit {
       return;
     }
 
+    const { data: repetido, error: errorBuscar } = await this.supabaseService.supabase
+      .from('user_items')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('item_id', item.id);
+
+    if (errorBuscar) {
+      console.error(errorBuscar);
+      await this.dialogService.mostrarError('Error comprobando item');
+      return;
+    }
+
+    if (repetido && repetido.length > 0) {
+      await this.dialogService.mostrarError('Item repetido');
+      return;
+    }
+
     const confirmado = await this.dialogService.confirmarAgregarItem(this.getItemDescription(item));
 
     if (!confirmado) {
@@ -95,22 +112,6 @@ export class ListaItems implements OnInit {
     } else {
       await this.dialogService.mostrarExito('Item añadido correctamente');
     }
-  }
-
-  async abrirOpciones(item: Item) {
-    await this.dialogService.mostrarOpciones(this.getItemDescription(item), {
-      onEditar: () => {
-        console.log('Editar:', item);
-        this.openPopup(item);
-      },
-      onDuplicar: () => {
-        console.log('Duplicar:', item);
-      },
-      onEliminar: () => {
-        console.log('Eliminar:', item);
-        this.confirmarEliminar(item);
-      },
-    });
   }
 
   async confirmarEliminar(item: Item) {

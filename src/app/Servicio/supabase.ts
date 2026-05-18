@@ -18,7 +18,7 @@ export class SupabaseService {
   constructor() {
     this.supabase = createClient(
       'https://wuvdcymnnndwotgfubyz.supabase.co',
-      'sb_publishable_83gUl4TmfsEAs3ozCv6gdg_VpbVNCtk'
+      'sb_publishable_83gUl4TmfsEAs3ozCv6gdg_VpbVNCtk',
     );
 
     // Obtener usuario actual
@@ -60,28 +60,22 @@ export class SupabaseService {
 
   // LEER todos los items
   async getItems(): Promise<Item[]> {
-  const { data, error } = await this.supabase
-    .from('items')
-    .select('id, description, image');
+    const { data, error } = await this.supabase.from('items').select('id, description, image');
 
-  console.log('DATA SUPABASE ITEMS:', data);
-  console.log('ERROR SUPABASE ITEMS:', error);
+    console.log('DATA SUPABASE ITEMS:', data);
+    console.log('ERROR SUPABASE ITEMS:', error);
 
-  if (error) {
-    alert(error.message);
-    return [];
+    if (error) {
+      alert(error.message);
+      return [];
+    }
+
+    return data as Item[];
   }
-
-  return data as Item[];
-}
 
   // LEER un item por id
   async getItemById(id: string): Promise<Item | null> {
-    const { data, error } = await this.supabase
-      .from('items')
-      .select('*')
-      .eq('id', id)
-      .single();
+    const { data, error } = await this.supabase.from('items').select('*').eq('id', id).single();
 
     if (error) {
       console.error('Error leyendo item:', error);
@@ -126,10 +120,7 @@ export class SupabaseService {
 
   // BORRAR item
   async deleteItem(id: string): Promise<boolean> {
-    const { error } = await this.supabase
-      .from('items')
-      .delete()
-      .eq('id', id);
+    const { error } = await this.supabase.from('items').delete().eq('id', id);
 
     if (error) {
       console.error('Error borrando item:', error);
@@ -137,5 +128,37 @@ export class SupabaseService {
     }
 
     return true;
+  }
+
+  async deleteUserItem(id: string): Promise<boolean> {
+    const { data, error } = await this.supabase.from('user_items').delete().eq('id', id).select();
+
+    console.log('FAVORITO BORRADO:', data);
+    console.log('ERROR BORRANDO FAVORITO:', error);
+
+    if (error) {
+      console.error('Error borrando favorito:', error);
+      return false;
+    }
+
+    return !!data && data.length > 0;
+  }
+
+  async deleteUserPersonaje(id: string): Promise<boolean> {
+    const { data, error } = await this.supabase
+      .from('user_personajes')
+      .delete()
+      .eq('id', id)
+      .select();
+
+    console.log('PERSONAJE BORRADO:', data);
+    console.log('ERROR BORRANDO PERSONAJE:', error);
+
+    if (error) {
+      console.error('Error borrando personaje:', error);
+      return false;
+    }
+
+    return !!data && data.length > 0;
   }
 }
